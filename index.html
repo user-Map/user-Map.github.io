@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nguyễn Minh Khôi</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+html,body{
+    height:100%;
+    overflow:hidden;
+    color:white;
+}
+
+/* VIDEO */
+video{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
+}
+
+/* ===== NAME PORTFOLIO STYLE ===== */
+.hero{
+    position:fixed;
+    top:60px;
+    width:100%;
+    text-align:center;
+}
+
+.hero h1{
+    font-size:48px;
+    font-weight:900;
+    letter-spacing:8px;
+    line-height:1.1;
+}
+
+.hero span{
+    display:block;
+}
+
+.hero p{
+    margin-top:12px;
+    font-size:16px;
+    letter-spacing:3px;
+    color:rgba(255,255,255,0.7);
+}
+
+/* CENTER CARD */
+.container{
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.card{
+    width:320px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background: rgba(255,255,255,0.05);
+    border-radius:24px;
+    padding:30px;
+    text-align:center;
+    border:1px solid rgba(255,255,255,0.15);
+    box-shadow:0 20px 50px rgba(0,0,0,0.6);
+}
+
+/* STATUS */
+.status{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:6px 18px;
+    border-radius:20px;
+    background: rgba(255,255,255,0.08);
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+.dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+}
+
+/* TABS */
+.tabs{
+    display:flex;
+    background: rgba(255,255,255,0.08);
+    border-radius:20px;
+    margin-bottom:20px;
+}
+
+.tabs button{
+    flex:1;
+    padding:10px;
+    border:none;
+    background:none;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    border-radius:20px;
+}
+
+.tabs button.active{
+    background: rgba(255,255,255,0.15);
+}
+
+.content{ display:none; }
+.content.active{ display:block; }
+
+/* Avatar */
+.avatar{
+    width:95px;
+    height:95px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid white;
+    margin-bottom:15px;
+}
+
+/* Bio */
+.bio{
+    font-size:15px;
+    line-height:1.6;
+    opacity:0.9;
+}
+
+/* Links */
+.links a{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    text-decoration:none;
+    color:white;
+    padding:10px;
+    margin:8px 0;
+    border-radius:14px;
+    font-size:15px;
+    background: rgba(255,255,255,0.08);
+    transition:0.3s;
+}
+
+.links a:hover{ transform:scale(1.05); }
+
+.zalo:hover{ background:#0084ff; }
+.fb:hover{ background:#1877f2; }
+.github:hover{ background:#333; }
+.gmail:hover{ background:#ea4335; }
+
+</style>
+</head>
+
+<body>
+
+<video autoplay muted loop playsinline>
+    <source src="background.MP4" type="video/mp4">
+</video>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>
+        <span>NGUYỄN</span>
+        <span>MINH KHÔI</span>
+    </h1>
+    <p>Frontend Developer — Vietnamese</p>
+</div>
+
+<div class="container">
+<div class="card">
+
+<div class="status">
+    <span class="dot" id="dot"></span>
+    <span id="statusText">Online</span>
+</div>
+
+<div class="tabs">
+    <button class="active" onclick="showTab(0,this)">👤</button>
+    <button onclick="showTab(1,this)">&lt;/&gt;</button>
+</div>
+
+<div class="content active">
+    <img src="avatar.JPG" class="avatar">
+    <div class="bio">
+        Không phải coder giỏi nhất,<br>
+        nhưng luôn là người không bỏ cuộc.<br><br>
+        🚀 Future Developer...
+    </div>
+</div>
+
+<div class="content">
+    <div class="links">
+        <a href="https://zalo.me/84989288257" target="_blank" class="zalo">
+            <i class="fa-solid fa-comment"></i> Zalo
+        </a>
+
+        <a href="https://www.facebook.com/share/1CMJqqzncC/?mibextid=wwXIfr"
+        target="_blank" class="fb">
+            <i class="fab fa-facebook"></i> Facebook
+        </a>
+
+        <a href="https://github.com/user-Map"
+        target="_blank" class="github">
+            <i class="fab fa-github"></i> GitHub
+        </a>
+
+        <a href="mailto:nguyenminhkhoii275@gmail.com"
+        class="gmail">
+            <i class="fa-solid fa-envelope"></i> Gmail
+        </a>
+    </div>
+</div>
+
+</div>
+</div>
+
+<audio autoplay loop>
+    <source src="music.MP3" type="audio/mpeg">
+</audio>
+
+<script>
+function showTab(index,btn){
+    document.querySelectorAll(".content").forEach(c=>c.classList.remove("active"));
+    document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));
+    document.querySelectorAll(".content")[index].classList.add("active");
+    btn.classList.add("active");
+}
+
+let hour = new Date().getHours();
+let dot = document.getElementById("dot");
+let text = document.getElementById("statusText");
+
+if(hour >= 6 && hour < 23){
+    dot.style.background = "#00ff66";
+    text.innerText = "Online";
+}else{
+    dot.style.background = "#ff3b3b";
+    text.innerText = "Offline";
+}
+</script>
+
+</body>
+</html>

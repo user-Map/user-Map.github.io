@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NguyenMinhKhoi</title>
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    font-family: Arial, sans-serif;
+    background: url("background.JPG") no-repeat center center/cover;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.card{
+    width:340px; /* nhỏ lại */
+    backdrop-filter: blur(15px);
+    background: rgba(255,255,255,0.15);
+    border-radius:25px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 15px 35px rgba(0,0,0,0.3);
+}
+
+.avatar{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    border:4px solid white;
+    object-fit:cover;
+    margin-bottom:15px;
+}
+
+.about{
+    background: rgba(0,0,0,0.45);
+    padding:18px;
+    border-radius:18px;
+    color:white;
+    font-size:14px;
+    line-height:1.6;
+    margin-bottom:20px;
+}
+
+.btn{
+    display:block;
+    text-decoration:none;
+    padding:14px;
+    border-radius:40px;
+    margin:10px 0;
+    color:white;
+    font-weight:bold;
+}
+
+.gmail{ background: linear-gradient(45deg,#ff5f6d,#ff2e2e); }
+.facebook{ background: linear-gradient(45deg,#4e73df,#224abe); }
+.zalo{ background: linear-gradient(45deg,#1cc7d0,#0d8ecf); }
+.github{ background: linear-gradient(45deg,#111,#000); }
+
+</style>
+</head>
+<body>
+
+<div class="card">
+
+<img src="avatar.JPG" class="avatar">
+
+<div class="about">
+Không phải coder giỏi nhất,<br>
+nhưng luôn là người không bỏ cuộc.<br><br>
+
+Đang học hỏi từng ngày,<br>
+đang nâng cấp bản thân từng chút.<br><br>
+
+<strong>Future Developer loading...</strong>
+</div>
+
+<a href="mailto:nguyenminhkhoii275@gmail.com" class="btn gmail">Gmail</a>
+<a href="#" class="btn facebook">Facebook</a>
+<a href="#" class="btn zalo">Zalo</a>
+<a href="https://github.com/" class="btn github">GitHub</a>
+
+</div>
+
+</body>
+</html>

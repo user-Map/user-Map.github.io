@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nguyễn Minh Khôi</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+html,body{
+    height:100%;
+    overflow:hidden;
+    color:white;
+}
+
+video{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
+}
+
+.container{
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.card{
+    width:300px;
+    backdrop-filter: blur(6px);
+    background: rgba(255,255,255,0.02);
+    border-radius:25px;
+    padding:20px;
+    text-align:center;
+    border:1px solid rgba(255,255,255,0.15);
+    box-shadow:0 10px 30px rgba(0,0,0,0.35);
+}
+
+/* STATUS */
+.status{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:6px 14px;
+    border-radius:20px;
+    background: rgba(255,255,255,0.05);
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+.dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+}
+
+@keyframes pulse {
+    0% { box-shadow:0 0 5px; }
+    50% { box-shadow:0 0 15px; }
+    100% { box-shadow:0 0 5px; }
+}
+
+/* TABS */
+.tabs{
+    display:flex;
+    background: rgba(255,255,255,0.05);
+    border-radius:20px;
+    margin-bottom:15px;
+}
+
+.tabs button{
+    flex:1;
+    padding:8px;
+    border:none;
+    background:none;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.tabs button.active{
+    background: rgba(255,255,255,0.15);
+    border-radius:20px;
+}
+
+.content{ display:none; }
+.content.active{ display:block; }
+
+/* AVATAR + RỒNG */
+.avatar-wrap{
+    position:relative;
+    width:95px;
+    height:95px;
+    margin:auto;
+    margin-bottom:10px;
+}
+
+.avatar{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid white;
+    position:relative;
+    z-index:2;
+}
+
+.dragon-ring{
+    position:absolute;
+    top:-10px;
+    left:-10px;
+    width:115px;
+    height:115px;
+    border-radius:50%;
+    animation: spin 5s linear infinite;
+    z-index:1;
+}
+
+.dragon-ring::before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    border:3px solid #c400ff;
+    box-shadow:
+        0 0 10px #c400ff,
+        0 0 20px #ff00ff,
+        0 0 35px #9900ff,
+        inset 0 0 15px #ff00ff;
+}
+
+.dragon-ring::after{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    background: conic-gradient(
+        transparent 0deg,
+        #ff00ff 40deg,
+        transparent 80deg,
+        transparent 200deg,
+        #9900ff 260deg,
+        transparent 320deg
+    );
+    filter:blur(8px);
+    opacity:0.8;
+}
+
+@keyframes spin{
+    0%{ transform:rotate(0deg);}
+    100%{ transform:rotate(360deg);}
+}
+
+/* LINKS */
+.links a{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    text-decoration:none;
+    color:white;
+    padding:8px;
+    margin:6px 0;
+    border-radius:12px;
+    font-size:14px;
+    background: rgba(255,255,255,0.05);
+    transition:0.3s;
+}
+
+.links a:hover{ transform:scale(1.05); }
+
+.zalo:hover{ background:#0084ff; box-shadow:0 0 15px #0084ff; }
+.fb:hover{ background:#1877f2; box-shadow:0 0 15px #1877f2; }
+.github:hover{ background:#333; box-shadow:0 0 15px #aaa; }
+.gmail:hover{ background:#ea4335; box-shadow:0 0 15px #ea4335; }
+.discord:hover{ background:#5865F2; box-shadow:0 0 15px #5865F2; }
+
+/* JOURNEY */
+.journey{
+    font-size:14px;
+    line-height:1.6;
+    background: rgba(255,255,255,0.05);
+    padding:12px;
+    border-radius:15px;
+}
+
+/* MUSIC */
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.music-btn{
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    border:none;
+    background: rgba(0,255,200,0.15);
+    color:#00ffd5;
+    font-size:20px;
+    cursor:pointer;
+    box-shadow:0 0 15px #00ffd5;
+}
+
+.music-btn.playing{
+    animation: rotate 3s linear infinite;
+}
+</style>
+</head>
+
+<body>
+
+<video autoplay muted loop playsinline>
+    <source src="background.MP4" type="video/mp4">
+</video>
+
+<div class="container">
+<div class="card">
+
+<div class="status">
+    <span class="dot" id="dot"></span>
+    <span id="statusText">Online</span>
+</div>
+
+<div class="tabs">
+    <button class="active" onclick="showTab(0,this)">👤</button>
+    <button onclick="showTab(1,this)">&lt;/&gt;</button>
+    <button onclick="showTab(2,this)">🗓️</button>
+</div>
+
+<div class="content active">
+    <div class="avatar-wrap">
+        <img src="avatar.JPG" class="avatar">
+        <div class="dragon-ring"></div>
+    </div>
+    <div class="bio">
+        Không phải coder giỏi nhất,<br>
+        nhưng luôn là người không bỏ cuộc.<br><br>
+        🚀 Future Developer...
+    </div>
+</div>
+
+<div class="content">
+    <div class="links">
+        <a href="https://zalo.me/84989288257" target="_blank" class="zalo">
+            <i class="fa-solid fa-comment"></i> Zalo
+        </a>
+    </div>
+</div>
+
+<div class="content">
+    <div class="journey">
+        Em là Khôi, mọi người thường gọi em là Mập.<br><br>
+        Ước mơ của em là đậu Đại học Công Nghệ Thông Tin TP.HCM.<br><br>
+        Và em sẽ cố gắng chia sẻ hành trình phát triển của mình từng ngày 🚀
+    </div>
+</div>
+
+</div>
+</div>
+
+<button id="musicBtn" class="music-btn">
+    <i class="fas fa-headphones"></i>
+</button>
+
+<audio id="bgMusic" loop preload="auto">
+    <source src="nhac.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function showTab(index,btn){
+    document.querySelectorAll(".content").forEach(c=>c.classList.remove("active"));
+    document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));
+    document.querySelectorAll(".content")[index].classList.add("active");
+    btn.classList.add("active");
+}
+
+let hour = new Date().getHours();
+let dot = document.getElementById("dot");
+let text = document.getElementById("statusText");
+
+if(hour >= 6 && hour < 23){
+    dot.style.background = "#00ff66";
+    dot.style.boxShadow = "0 0 10px #00ff66";
+    dot.style.animation = "pulse 1.5s infinite";
+    text.innerText = "Online";
+}else{
+    dot.style.background = "#ff3b3b";
+    dot.style.boxShadow = "0 0 10px #ff3b3b";
+    text.innerText = "Offline";
+}
+
+const music = document.getElementById("bgMusic");
+const btn = document.getElementById("musicBtn");
+
+btn.onclick = function(){
+    if(music.paused){
+        music.play();
+        btn.innerHTML = '<i class="fas fa-pause"></i>';
+        btn.classList.add("playing");
+    } else {
+        music.pause();
+        btn.innerHTML = '<i class="fas fa-headphones"></i>';
+        btn.classList.remove("playing");
+    }
+}
+</script>
+
+</body>
+</html>
